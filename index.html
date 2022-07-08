@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title></title>
+   <link rel="stylesheet" href="css/nouislider.min.css"> 
+   <link rel="stylesheet" href="css/style.css">  
+</head>
+<body>
+
+<form action="#" class="form" id="form">
+	<div class="form__title">
+		Узнайте стоимость ремонта
+	</div>
+	<div class="form__top">
+		<div class="form__type">
+			<div class="form__subtitle">Укажите тип дома</div>
+			<select name="select" class="form__sel" id="select">
+				<option value="Новостройка">Новостройка</option>
+				<option value="Вторичка">Вторичка</option>
+			</select>
+		</div>
+		<div class="form__metr">
+			<div class="form__subtitle">
+				Метраж помещения:
+				<input type="number" id="range-value" value="30">
+			</div>
+			<div class="form__range">
+				<div class="form-main__range" id="slider">
+				</div>		
+				<div class="form-main__startend">
+					<div class="form-main__start">
+						30 м<span>2</span>
+					</div>
+					<div class="form-main__end">
+						330 м<span>2</span>
+					</div>							
+				</div>					
+			</div>
+		</div>
+	</div>
+	<div class="form__bottom">
+		<div class="form__repair">
+			<div class="form__subtitle">
+				Укажите тип ремонта
+			</div>
+			<div class="form__radio-first">
+				<input checked type="radio" name="radio1" value="Евроремонт" id="radio1"> 
+				<label for="radio1"><span></span>Евроремонт</label>
+				<span class="help">?
+					<p>
+						<b>Евроремонт</b> — Ремонт с применением современных технологий штукатурки и стяжки по маякам. Выполним по европейским стандартам DIN
+					</p>
+				</span>
+			</div>
+			<div class="form__radio-second">
+				<input type="radio" name="radio1" value="Дизайнерский" id="radio2"> 
+			   <label for="radio2"><span></span>Дизайнерский</label>
+				<span class="help">?
+					<p>
+						<b>Дизайнерский</b> — Сделаем ремонт по дизайн-проекту. Работаем с натуральными материалами и сложными конструкциями
+					</p>
+				</span>			   
+			</div>
+			<div class="form__radio-thirth">
+				<input type="radio" name="radio1" value="Черновой" id="radio3"> 
+			   <label for="radio3"><span></span>Черновой</label>
+				<span class="help">?
+					<p>
+						<b>Черновой</b> —  Возведем перегородки, выровняем и подготовим стены под чистовую отделку. Разведем электропроводку
+					</p>
+				</span>
+			</div>
+			<div class="form__radio-forth">
+				<input checked type="radio" name="radio2" value="Косметический" id="radio4"> 
+				<label for="radio4"><span></span>Косметический </label>		
+				<span class="help">?
+					<p>
+						<b>Косметический</b> — Обновим ремонт без выравнивания: заменим обои и ламинат, покрасим потолок
+					</p>
+				</span>						
+			</div>
+			<div class="form__radio-fivth">
+				<input type="radio" name="radio2" value="Капитальный" id="radio5"> 
+				<label for="radio5"><span></span>Капитальный </label>		
+				<span class="help">?
+					<p>
+						<b>Капитальный</b> — Выровняем стены и полы, заменим электрику и сантехнику, смонтируем натяжные потолки
+					</p>
+				</span>						
+			</div>
+			<div class="form__radio-sixth">
+				<input type="radio" name="radio2" value="Евроремонт" id="radio6"> 
+				<label for="radio6"><span></span>Евроремонт</label>
+				<span class="help">?
+					<p>
+						<b>Евроремонт</b> — Ремонт с применением современных технологий штукатурки и стяжки по маякам. Выполним по европейским стандартам DIN
+					</p>
+				</span>				
+			</div>			
+		</div>
+		<div class="form__extra">
+			<div class="form__subtitle">
+				Дополнительно нужно
+			</div>	
+			<div class="form__checkbox-first">
+				<input checked type="checkbox" name="checkbox" value="Разработать дизайн-проект" id="checkbox1"> 
+				<label for="checkbox1"><span></span>Разработать дизайн-проект</label>
+			</div>
+			<div class="form__checkbox-second">
+				<input type="checkbox" name="checkbox1" value="Подобрать чистовой материал БЕСПЛАТНО" id="checkbox2"> 
+			   <label for="checkbox2"><span></span>Подобрать чистовой материал БЕСПЛАТНО</label>
+			</div>
+			<div class="form__checkbox-thirth">
+				<input type="checkbox" name="checkbox1" value="Получить дизайн кухни БЕСПЛАТНО" id="checkbox3"> 
+			   <label for="checkbox3"><span></span>Получить дизайн кухни БЕСПЛАТНО</label>
+			</div>
+		</div>
+	</div>
+	<div class="form__footer">
+		<div class="form__subtitle">
+			Срок ремонта: <span id="form__subtitle">72</span> дня
+		</div>
+		<div class="form__bar">
+			<span id="form__bar"></span>
+		</div>
+		<button>
+			Узнать стоимость
+		</button>
+	</div>
+</form>
+
+
+
+<script src="js/nouislider.min.js"></script>
+<script src="js/script.js"></script>  
+</body>
+</html>
