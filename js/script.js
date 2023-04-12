@@ -58,12 +58,17 @@ form.addEventListener('change', function () {
     myAlgh();
 });
 
-var help = document.getElementsByClassName("help");
-for (var i = 0; i <= 6; i++) {
-    help[i].addEventListener('mouseenter', function () {
-        this.classList.add('active');
-    });  
-    help[i].addEventListener('mouseleave', function () {
-        this.classList.remove('active');
-    });       
-}
+var btn = document.getElementById("form__btn");
+var popup = document.getElementById("popup");
+var popupClose = document.getElementById("popup-close");
+var popupResult = document.getElementById("popup-result");
+
+btn.addEventListener('click', function (event) {
+    event.preventDefault();
+    popup.classList.add('open');
+    popupResult.innerHTML = Math.round(form__subtitle.innerHTML * 3000).toLocaleString("ru");;
+});       
+popupClose.addEventListener('click', function (event) {
+    event.preventDefault();
+    popup.classList.remove('open');
+});     

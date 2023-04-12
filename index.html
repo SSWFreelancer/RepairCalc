@@ -4,9 +4,477 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title></title>
-   <link rel="stylesheet" href="css/nouislider.min.css"> 
-   <link rel="stylesheet" href="css/style.css">  
+   <title>SSW-Calc</title>
+   <link rel="stylesheet" href="https://sswfreelancer.github.io/RepairCalc/css/nouislider.min.css"> 
+   <style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap');
+		* {
+		padding: 0;
+		margin: 0;
+		border: 0;
+		}
+		*, *:before, *:after {
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		}
+		:focus, :active {
+		outline: none;
+		}
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+		}
+		input[type=number] {
+		-moz-appearance: textfield;
+		}
+		body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 400;
+		background: coral;
+		flex-direction: column;
+		}
+		.form{
+		margin: 30px 0;
+		background: #fff;
+		padding: 20px 30px;
+		border-radius: 5px;
+		width: calc(100vw - 30px);
+		max-width: 660px;
+		}
+		.form__title {
+		text-align: center;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 1.25;
+		margin-bottom: 15px;
+		}
+		.form__top {
+		align-items: start;
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		}
+		.form__type {
+		flex: 0 1 50%;
+		}
+		.form__subtitle {
+		font-weight: 600;
+		font-size: 15px;
+		height: 34px;
+		display: flex;
+		align-items: center;
+		white-space: nowrap;
+		}
+		.form__subtitle span{
+		margin: 0 6px;
+		}
+		.form__subtitle input{
+			background-color: #f6f8ff;
+			border: 1px solid #2168de;
+			color: #7f7f7f;
+			width: 58px;
+			height: 34px;
+			padding: 6px;
+			font-weight: 700;
+			text-align: center;
+			cursor: text;
+			margin-left: 10px;
+		}
+		.form__subtitle input:focus{
+		color: #000;
+		box-shadow: none;
+		border: 1px solid #2168de;
+		}
+		.form__sel {
+		width: 100%;
+		cursor: pointer;
+		color: #595959;
+		border: 2px solid #2168de;  
+		padding: 0px 40px 0 20px;
+		height: 49px;
+		font-size: 15px;
+		outline: none;  
+		border-radius: 3px;
+		}
+		.form__metr {
+		flex: 0 1 50%;
+		padding-left:  30px;
+		}
+		.form__range{
+		height: 49px;
+		display: flex;
+		justify-content: flex-end;
+		flex-direction: column;
+		}
+		#slider{
+		padding-right: 16px;
+		cursor: pointer;
+		}
+		.noUi-horizontal .noUi-handle {
+		top: -5px;
+		}
+		.noUi-handle {
+		background: #2168de;
+		max-width: 18px;
+		max-height: 18px;
+		border-radius: 3px;
+		box-shadow: -2.3px 1.9px 7.7px 0.3px rgb(25 23 23 / 10%), inset 0 0 6.5px 0.5px rgb(12 59 138 / 28%);
+		cursor: pointer;
+		border: none;
+		}
+		.noUi-handle:before, .noUi-handle:after {
+		display: none;
+		}
+		.noUi-target {
+		border: none;
+		width: 100%;
+		height: 8px;
+		background: #f2f7ff;
+		border-radius: 4px;
+		}
+		.noUi-connect {
+		background: #2168de;
+		}
+		.form-main__startend {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 8px;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 17px;
+		color: #000;
+		}
+		.form-main__startend div {
+		position: relative;
+		}
+		.form-main__startend span {
+		position: relative;
+		top: -3px;
+		font-size: 12px;
+		}
+		.form__bottom {
+		display: flex;
+		margin-top: 20px;
+		justify-content: space-between;
+		}
+		.form__repair {
+		flex: 0 1 50%;
+		}
+		.form__radio-first, .form__radio-second, .form__radio-forth, .form__radio-fivth, .form__radio-sixth {
+		display: flex;
+		align-items: center;
+		padding-left: 31px;
+		position: relative;
+		margin-bottom: 15px;
+		}
+		.form__radio-thirth {
+		display: flex;
+		align-items: center;
+		padding-left: 31px;
+		position: relative;
+		}
+		.form__radio-forth, .form__radio-fivth, .form__radio-sixth{
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		}
+		.form.active .form__radio-forth,.form.active .form__radio-fivth,.form.active .form__radio-sixth{
+		opacity: 1;
+		visibility: visible;
+		position: relative;
+		}
+		.form.active .form__radio-first, .form.active .form__radio-second,.form.active .form__radio-thirth{
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		}
+
+		.form__extra {
+		flex: 0 1 50%;
+		padding-left:  30px;
+		}
+
+		.form__extra input, .form__repair input{
+		display: none;
+		}
+		.form__checkbox-first {
+		display: flex;
+		align-items: center;
+		padding-left: 31px;
+		position: relative;
+		margin-bottom: 15px;
+		}
+		.form__checkbox-second {
+		display: flex;
+		align-items: center;
+		padding-left: 31px;
+		position: relative;
+		margin-bottom: 15px;
+		}
+		.form__checkbox-thirth {
+		display: flex;
+		align-items: center;
+		padding-left: 31px;
+		position: relative;
+		}
+		.help{
+			position: relative;
+			width: 16px;
+			height: 16px;
+			display: inline-flex;
+			border: 1px solid #dbe2e9;
+			margin-left: 10px;
+			-webkit-border-radius: 8px;
+			border-radius: 8px;
+			font-size: 11px;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+		}
+		.help p{
+		position: absolute;
+		bottom: 20px;
+		width: 200px;
+		padding: 0.25rem 0.5rem;
+		color: #fff;
+		text-align: left;
+		background-color: #000;
+		border-radius: 0.25rem; 
+		font-weight: 400;
+		line-height: 1.5;  
+		font-size: 13px;   
+		opacity: 0;
+		visibility: hidden;
+		z-index: 13;
+		transition:all 0.3s ease 0s;
+		}
+		.help p:after{
+		content:"";
+		border-left:9px solid transparent;
+		border-top:10px solid #000;
+		border-right: 9px solid transparent;
+		position: absolute;
+		bottom: -9px;
+		left: 50%;
+		transform:translateX(-50%);
+
+		}
+		.help p:before{
+		content:"";
+		position: absolute;
+		left: 0;
+		bottom: -30px;
+		width: 100%;
+		height: 30px;
+		pointer-events: none;
+		}
+		.help:hover p:before{
+		pointer-events: auto;
+		}
+		.help:hover p{
+		opacity: 1;
+		bottom:30px;
+		visibility: visible;
+		}
+
+		.form__extra input:checked + label span::after, .form__repair input:checked + label span::after{
+		transform: scale(1);
+		}
+		.form__extra label, .form__repair label{
+		font-size: 15px;
+		cursor: pointer;
+		font-weight: 400;
+		}
+		.form__extra label span, .form__repair label span {
+		position: absolute;
+		flex: 0 0 20px;
+		min-width: 20px;
+		height: 20px;
+		top: 0px;
+		left: 0px;
+		border: 2px solid #2168de;
+		background-color: transparent;
+		}
+		.form__repair label span{
+		border-radius: 50%;
+		}
+		.form__extra label span::after,.form__repair label span::after {
+		content: "";
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		z-index: 2;
+		left: 2px;
+		top: 2px;
+		background: #2168de;
+		transform: scale(0);
+		border-radius: 2px;
+		transition: all .2s;
+		}
+		.form__repair label span::after{
+		border-radius: 50%; 
+		}
+
+		.form__footer {
+		background: #ebebeb;
+		margin: 25px  -30px -20px;
+		padding: 10px 30px 30px;
+		border-radius: 0 0 5px 5px;
+		}
+		@media(max-width: 686px){
+		.form{
+			padding: 15px;
+		}
+		.form__footer {
+			margin: 25px -15px -15px;
+		}  
+		.form__extra label, .form__repair label{
+			font-size: 14px;
+		}  
+		}
+
+		.form__bar {
+		margin-top: 15px;
+		width: 100%;
+		background: #fff;
+		height: 10px;
+		position: relative;
+		}
+		.form__bar span{
+		position: absolute;
+		height: 100%;
+		left: 0;
+		top: 0;
+		width: 22.0183%;
+		max-width: 100%;
+		background: url('https://mastera-remonta.com/wp-content/themes/mastera/img/calc_n_disc.png') 0 0 repeat;
+		background-color: #2168de;
+
+		}
+		.form__footer button{
+		width: 250px;
+		margin: 25px auto 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 10px;
+		height: 64px;
+		font-weight: 700;
+		font-size: 16px;
+		text-align: center;
+		cursor: pointer;
+		color: #fff;
+		background: #FF0000;
+		border: 2px solid #FF0000;
+		text-decoration: none;
+		border-radius: 5px;
+		transition: all 0.3s ease 0s;
+		box-shadow: 0 0 7px 0 rgb(0 0 0 / 30%);
+		}
+		.form__footer button:hover{
+		box-shadow: -1px 1px 20px 0px rgba(255, 0, 0, 0.3);
+		}
+
+		@media(max-width: 521px){
+		.form__top{
+			display: block;
+		}
+		.form__bottom{
+			display: block;
+		}
+		.form__metr, .form__extra{
+			margin-top: 20px;
+			padding-left: 0;
+		}
+		.form__title{
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+		.form__footer{
+			padding-bottom: 20px;
+		}
+		.form__footer button{
+			margin-top: 20px;
+			height: 50px;
+			width: 100%;
+			font-size: 14px;
+		}
+		}
+
+		.popup{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
+		z-index: 1000;
+		display: grid;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0.6);
+		transition:all 0.3s ease 0s;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		padding: 20px;
+		}
+		.popup>p{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		}
+		.popup.open{
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		}
+		.popup__content{
+		background: #fff;
+		padding: 20px 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 5px;
+		width: 100%;
+		position: relative;
+		}
+		.popup__content p{
+		color: #2168de;
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 1.2;
+		}
+		.popup__title{
+		text-align: center;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 1.25;
+		margin-bottom: 15px;
+		margin-bottom: 15px;
+		}
+
+		@media(max-width: 521px){
+		.popup__content{
+			padding: 20px;
+			width: calc(100vw - 40px);
+		}
+		.popup__content p{
+			font-size: 18px;
+		}
+		.popup__title{
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+		}	   
+   </style>
 </head>
 <body>
 
@@ -126,15 +594,100 @@
 		<div class="form__bar">
 			<span id="form__bar"></span>
 		</div>
-		<button>
+		<button id="form__btn">
 			Узнать стоимость
 		</button>
 	</div>
 </form>
+<div class="popup" id="popup">
+	<p id="popup-close"></p>
+	<div class="popup__content">
+		<div class="popup__title">
+			Стоимость ремонта:
+		</div>
+		<p>
+			<span id="popup-result">1800</span> ₽
+		</p>
+	</div>
+</div>
 
 
+<script src="https://sswfreelancer.github.io/RepairCalc/js/nouislider.min.js"></script>
+<script>
+	var form = document.getElementById('form');
+	var form__subtitle = document.getElementById('form__subtitle');
+	var formBar = document.getElementById('form__bar');
+	function myAlgh(){
+		var checkRadio = document.querySelector('input[name="radio1"]:checked');
+		var checkRadio2 = document.querySelector('input[name="radio2"]:checked');
+		var e = document.getElementById("select").value;
+		if(e == "Новостройка"){
+			form.classList.remove('active');
+			var time = directionField.value;
+			if(checkRadio.value == "Евроремонт"){
+				time = time*1.2;
+			}else if(checkRadio.value == "Дизайнерский"){
+				time = time*1.5;
+			}else{
+				time = time*0.6;
+			}
+			form__subtitle.innerHTML = Math.round(time);
+			bar = time;
+			bar = bar/327 * 100;
+			formBar.style.width = bar + "%";
+		}else{
+			form.classList.add('active');
+			var time = directionField.value;
+			if(checkRadio2.value == "Косметический"){
+				time = time*0.3;
+			}else if(checkRadio2.value == "Капитальный"){
+				time = time*1;
+			}else{
+				time = time*1.2;
+			}
+			form__subtitle.innerHTML = Math.round(time);
+			bar = time;
+			bar = bar/327 * 100;
+			formBar.style.width = bar + "%";
+		}
+	}
+	const slider = document.getElementById('slider');
+	noUiSlider.create(slider, {
+		start: [60],
+		connect: [true,false],
+		padding: [0,0],
+		step: 1,
+		range: {
+			'min': [30],
+			'max': [330]
+		},
+	});
+	var directionField = document.getElementById('range-value');
+	slider.noUiSlider.on('update', function (values, handle) {
+		directionField.value = parseFloat(values[handle]);
+		myAlgh();
+	});
+	directionField.addEventListener('change', function () {
+		slider.noUiSlider.set([directionField.value]);
+	});
+	form.addEventListener('change', function () {
+		myAlgh();
+	});
 
-<script src="js/nouislider.min.js"></script>
-<script src="js/script.js"></script>  
+	var btn = document.getElementById("form__btn");
+	var popup = document.getElementById("popup");
+	var popupClose = document.getElementById("popup-close");
+	var popupResult = document.getElementById("popup-result");
+
+	btn.addEventListener('click', function (event) {
+		event.preventDefault();
+		popup.classList.add('open');
+		popupResult.innerHTML = Math.round(form__subtitle.innerHTML * 3000).toLocaleString("ru");;
+	});       
+	popupClose.addEventListener('click', function (event) {
+		event.preventDefault();
+		popup.classList.remove('open');
+	});     
+</script> 
 </body>
 </html>
